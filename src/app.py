@@ -1,5 +1,10 @@
 from flask import Flask
+from flask_restful import Api, Resource
 from .config import app_config
+from .views.UserView import user_api
+from .models import db
+from .resources.HelloWorld import HelloWorld
+from .resources.StudentResource import StudentResource
 
 
 def create_app(env_name):
@@ -11,10 +16,12 @@ def create_app(env_name):
 
     app = Flask(__name__)
     app.config.from_object(app_config[env_name])
+    db.init_app(app)
 
-    @app.route('/', methods=['GET'])
-    def index():
-        return 'hello world'
+    api = Api(app)
 
+    api.add_resource(HelloWorld, "/")
+    api.add_resource(StudentResource, "/students")
+    app.register_blueprint(user_api, url_prefix='/api/v1/users')
 
     return app

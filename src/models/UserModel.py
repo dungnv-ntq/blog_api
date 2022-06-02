@@ -38,14 +38,6 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    @staticmethod
-    def get_all_users():
-        return User.query.all()
-
-    @staticmethod
-    def get_one_user(id):
-        return User.query.get(id)
-
     def __generate_hash(self, password):
         return bcrypt.generate_password_hash(password, rounds=10).decode("utf-8")
 
