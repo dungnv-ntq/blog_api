@@ -12,6 +12,7 @@ class Development(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     BUNDLE_ERRORS = True
+    SQLALCHEMY_ECHO = True
 
 
 class Production(object):
@@ -23,6 +24,7 @@ class Production(object):
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    BUNDLE_ERRORS = True
 
 
 app_config = {

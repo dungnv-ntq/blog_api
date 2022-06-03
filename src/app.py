@@ -4,7 +4,7 @@ from .config import app_config
 from .views.UserView import user_api
 from .models import db
 from .resources.HelloWorld import HelloWorld
-from .resources.StudentResource import StudentResource
+from .resources.StudentResource import StudentListResource, StudentResource
 
 
 def create_app(env_name):
@@ -21,7 +21,8 @@ def create_app(env_name):
     api = Api(app)
 
     api.add_resource(HelloWorld, "/")
-    api.add_resource(StudentResource, "/students")
+    api.add_resource(StudentListResource, "/students")
+    api.add_resource(StudentResource, "/students/<student_id>")
     app.register_blueprint(user_api, url_prefix='/api/v1/users')
 
     return app
